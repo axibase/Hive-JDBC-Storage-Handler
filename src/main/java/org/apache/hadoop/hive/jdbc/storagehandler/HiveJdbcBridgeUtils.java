@@ -49,7 +49,7 @@ public class HiveJdbcBridgeUtils {
 	 */
 	private static int hiveTypeToSqlType(String hiveType) throws SerDeException {
 		final String lctype = hiveType.toLowerCase();
-		if ("string".equals(lctype)) {
+		if ("string".equals(lctype) || "varchar".equals(lctype)) {
 			return Types.VARCHAR;
 		} else if ("float".equals(lctype)) {
 			return Types.FLOAT;

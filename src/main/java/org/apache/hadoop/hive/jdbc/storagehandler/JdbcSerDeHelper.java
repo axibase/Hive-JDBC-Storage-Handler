@@ -16,27 +16,19 @@
  */
 package org.apache.hadoop.hive.jdbc.storagehandler;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.hive.serde2.SerDe;
+import org.apache.hadoop.hive.ql.plan.TableScanDesc;
 import org.apache.hadoop.hive.serde2.SerDeException;
-import org.apache.hadoop.hive.serde2.SerDeStats;
-import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspector;
-import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspectorFactory;
-import org.apache.hadoop.hive.serde2.objectinspector.StructField;
-import org.apache.hadoop.hive.serde2.objectinspector.StructObjectInspector;
-import org.apache.hadoop.io.Writable;
-import java.sql.*;
 import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapreduce.lib.db.DBConfiguration;
-import org.apache.hadoop.mapreduce.TaskAttemptContext;
-import org.apache.hadoop.mapreduce.TaskAttemptID;
-import org.apache.hadoop.hive.ql.plan.TableScanDesc;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
+import java.util.Properties;
 
 public class JdbcSerDeHelper {
 
@@ -62,12 +54,12 @@ public class JdbcSerDeHelper {
 
             int i = 0;
             for (i = 1; i < columnsNumber; i++) {
-                String colName = rsmd.getColumnName(i);
+                String colName = rsmd.getColumnName(i).replaceAll("\\.", "\\$");
                 String colType = rsmd.getColumnTypeName(i);
                 colNames.append(colName + ",");
                 colTypeNames.append(sqlToHiveColumnTypeNames(colType) + ":");
             }
-            colNames.append(rsmd.getColumnName(i));
+            colNames.append(rsmd.getColumnName(i).replaceAll("\\.", "\\$"));
             colTypeNames.append(rsmd.getColumnTypeName(i));
 
             columnNames = colNames.toString();

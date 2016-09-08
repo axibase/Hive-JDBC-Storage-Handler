@@ -16,26 +16,19 @@
 
 package org.apache.hadoop.hive.wrapper;
 
-import java.io.IOException;
-
-import org.apache.hadoop.mapred.RecordReader;
-import org.apache.hadoop.mapred.InputSplit;
-import org.apache.hadoop.mapred.FileSplit;
-import org.apache.hadoop.mapred.JobConf;
-import org.apache.hadoop.mapred.Reporter;
-import org.apache.hadoop.mapreduce.lib.db.DBConfiguration;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.hadoop.hive.jdbc.storagehandler.Constants;
+import org.apache.hadoop.hive.jdbc.storagehandler.JdbcDBInputSplit;
+import org.apache.hadoop.hive.shims.ShimLoader;
+import org.apache.hadoop.mapred.*;
 import org.apache.hadoop.mapreduce.InputFormat;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.TaskAttemptID;
-import org.apache.hadoop.hive.shims.ShimLoader;
+import org.apache.hadoop.mapreduce.lib.db.DBConfiguration;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import java.sql.*;
-import org.apache.hadoop.hive.jdbc.storagehandler.Constants;
-import org.apache.hadoop.hive.jdbc.storagehandler.JdbcDBInputSplit;
+import java.io.IOException;
+import java.sql.Connection;
 public class RecordReaderWrapper<K, V> implements RecordReader<K, V> {
 
     private static final Log LOG = LogFactory.getLog(RecordReaderWrapper.class);
@@ -71,27 +64,15 @@ public class RecordReaderWrapper<K, V> implements RecordReader<K, V> {
         if(oldJobConf.get(Constants.LAZY_SPLIT) != null &&
                 (oldJobConf.get(Constants.LAZY_SPLIT)).toUpperCase().equals("TRUE")){
             lazySplitActive = true;
-            ResultSet results = null;  
-            Statement statement = null;
             delegate = new DBConfiguration(oldJobConf);
             try{    
-                conn = delegate.getConnection();
-           
-                statement = conn.createStatement();
-
-                results = statement.executeQuery("Select Count(*) from " + oldJobConf.get("mapred.jdbc.input.table.name"));
-                results.next();
-
-                count = results.getLong(1);
+                count = oldJobConf.getInt(Constants.COUNT, 1000);
                 chunks = oldJobConf.getInt("mapred.map.tasks", 1);
                 LOG.info("Total numer of records: " + count + ". Total number of mappers: " + chunks );
                 splitLen = count/chunks;
                 if((count%chunks) != 0)
                     splitLen++;
                 LOG.info("Split Length is "+ splitLen);
-                results.close();
-                statement.close();
-                
             }
             catch(Exception e){
                 // ignore Exception
