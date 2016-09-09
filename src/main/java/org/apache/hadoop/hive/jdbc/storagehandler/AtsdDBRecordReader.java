@@ -49,6 +49,7 @@ public class AtsdDBRecordReader<T extends DBWritable> extends DBRecordReader<T> 
 
     @Override
     protected ResultSet executeQuery(String query) throws SQLException {
+        query = query.substring(0, query.lastIndexOf(" LIMIT"));
         LOG.debug("[executeQuery] query is " + query);
         query = query.replaceAll("\\$", ".");
         this.statement = getConnection().prepareStatement(query,
