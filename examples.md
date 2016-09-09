@@ -1,3 +1,5 @@
+## Example Categories
+
 * [Tables for metrics](#jdbcstoragehandler)
     * [Hive table for metric without tags](#hive-table-for-metric-without-tags)
     * [Hive table for metric with tags](#hive-table-for-metric-with-tags)
