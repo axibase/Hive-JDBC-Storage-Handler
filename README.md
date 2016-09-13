@@ -1,6 +1,6 @@
 #Hive Storage Handler for JDBC#
 
-The **Hive Storage Handler For JDBC** by [Axibase](www.axibase.com), which is a fork of [HiveJdbcStorageHandler](https://github.com/qubole/Hive-JDBC-Storage-Handler), helps users read from [Axibase Time Series Database](http://axibase.com/products/axibase-time-series-database/) using Hive, and also enabling them to run SQL queries to analyze data that resides in JDBC tables.
+The **Hive Storage Handler For JDBC** is a fork of [HiveJdbcStorageHandler](https://github.com/qubole/Hive-JDBC-Storage-Handler), helps users read from [Axibase Time Series Database](http://axibase.com/products/axibase-time-series-database/) using Hive, and also enabling them to run SQL queries to analyze data that resides in JDBC tables.
 
 
 ##Building from Source##
@@ -51,7 +51,7 @@ CREATE EXTERNAL TABLE disk_used
       );```
 
 
-####Queries to Read from ATSD ####
+####Queries to Read from ATSD (see more [examples](/examples.md) )####
 ```sql
 hive> SELECT * 
           FROM disk_used 
