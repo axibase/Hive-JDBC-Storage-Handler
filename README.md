@@ -36,19 +36,19 @@ The **Hive Storage Handler For JDBC** by [Axibase](www.axibase.com), which is a 
 ##Table Creation##
 
 ```
-CREATE EXTERNAL TABLE HiveTable
-row format serde 'org.apache.hadoop.hive.jdbc.storagehandler.JdbcSerDe'
-STORED BY 'org.apache.hadoop.hive.jdbc.storagehandler.JdbcStorageHandler'
-TBLPROPERTIES (
-  "mapred.jdbc.driver.class"="com.mysql.jdbc.Driver",
-  "mapred.jdbc.url"="jdbc:mysql://localhost:3306/rstore",
-  "mapred.jdbc.username"="root",
-  "mapred.jdbc.input.table.name"="JDBCTable",
-  "mapred.jdbc.output.table.name" = "JDBCTable",
-  "mapred.jdbc.password"="",
-  "mapred.jdbc.hive.lazy.split"= "false"
-);
-```
+DROP TABLE disk_used
+CREATE EXTERNAL TABLE disk_used
+      row format serde 'org.apache.hadoop.hive.jdbc.storagehandler.JdbcSerDe'
+      STORED BY 'org.apache.hadoop.hive.jdbc.storagehandler.JdbcStorageHandler'
+      TBLPROPERTIES (
+        "mapred.jdbc.driver.class"="com.axibase.tsd.driver.jdbc.AtsdDriver",
+        "mapred.jdbc.url"="jdbc:axibase:atsd:https://10.102.0.6:8443/api/sql\;trustServerCertificate=true\;strategy=file",
+        "mapred.jdbc.username"="username",
+        "mapred.jdbc.password"="password",
+        "mapred.jdbc.input.table.name"="'df.disk_used'",
+        "mapred.jdbc.output.table.name"="'df.disk_used'",
+        "mapred.jdbc.hive.lazy.split"= "true"
+      );```
 
 
 ####Queries to Read from ATSD ####
@@ -115,7 +115,7 @@ hive> SELECT value, `tags$mount_point`, `tags$file_system`
 
 ##Contributions##
 * https://github.com/myui/HiveJdbcStorageHandler
+* https://github.com/qubole/Hive-JDBC-Storage-Handler
 * https://github.com/hava101
 * https://github.com/stagraqubole
 * https://github.com/divyanshu25
-* https://github.com/qubole/Hive-JDBC-Storage-Handler

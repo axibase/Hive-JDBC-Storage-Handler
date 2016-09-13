@@ -1,4 +1,4 @@
-## Example Categories
+## Examples Categories
 
 * [Tables for metrics](#jdbcstoragehandler)
     * [Hive table for metric without tags](#hive-table-for-metric-without-tags)
@@ -16,6 +16,7 @@
 ###Hive table for metric without tags
 
 ```sql
+hive> DROP TABLE cpu_busy;
 hive> CREATE EXTERNAL TABLE cpu_busy
       row format serde 'org.apache.hadoop.hive.jdbc.storagehandler.JdbcSerDe'
       STORED BY 'org.apache.hadoop.hive.jdbc.storagehandler.JdbcStorageHandler'
@@ -88,6 +89,7 @@ hive> SELECT value, datetime
 ###Hive table for metric with tags
 
 ```sql
+hive> DROP TABLE disk_used;
 hive> CREATE EXTERNAL TABLE disk_used
       row format serde 'org.apache.hadoop.hive.jdbc.storagehandler.JdbcSerDe'
       STORED BY 'org.apache.hadoop.hive.jdbc.storagehandler.JdbcStorageHandler'
@@ -173,6 +175,7 @@ hive> SELECT value, `tags$mount_point`, `tags$file_system`
 ###Hive table for atsd_series
 
 ```sql
+hive> DROP TABLE atsd_series;
 hive> CREATE EXTERNAL TABLE atsd_series(
           entity string,
           metric string,
@@ -248,6 +251,7 @@ nmon-linux;nmon-linux-beta;scollector-linux;scollector-nur;solarwind-vmware-vm;t
 ###Hive table for atsd_entity
 
 ```
+hive> DROP TABLE atsd_entity;
 hive> CREATE EXTERNAL TABLE atsd_entity(row_key string, tags map<string,string>, disabled boolean, id string)
 STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
 WITH SERDEPROPERTIES (
@@ -273,18 +277,61 @@ atsd	{"os":"ubuntu"}	true	9
 ###Hive table for atsd_metric
 
 ```sql
-hive> CREATE EXTERNAL TABLE atsd_metric(row_key string, tags map<string,string>, disabled boolean, id string)
+hive> CREATE EXTERNAL TABLE atsd_metric(
+        row_key string,
+        counter boolean,
+        description string,
+        disabled boolean,
+        filter boolean,
+        id string,
+        invalidValueAction string,
+        label string,
+        minValue double,
+        maxValue double,
+        persistent boolean,
+        retentionInterval int,
+        timePrecision string,
+        type string,
+        versioning boolean,
+        t map<string,string>)
 STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
 WITH SERDEPROPERTIES (
-"hbase.columns.mapping" = ":key,t:,n:disabled, n:id",
+"hbase.columns.mapping" = " :key,
+                            n:counter,
+                            n:description,
+                            n:disabled,
+                            n:filter,
+                            n:id,
+                            n:invalidValueAction,
+                            n:label,
+                            n:minValue,
+                            n:maxValue,
+                            n:persistent,
+                            n:retentionInterval,
+                            n:timePrecision,
+                            n:type,
+                            n:versioning,
+                            t:",
 "hbase.table.default.storage.type" = "binary"
 )
 TBLPROPERTIES("hbase.table.name" = "atsd_metric");
 hive> describe atsd_metric
 row_key             	string              	from deserializer   
-tags                	map<string,string>  	from deserializer   
+counter             	boolean             	from deserializer   
+description         	string              	from deserializer   
 disabled            	boolean             	from deserializer   
-id                  	string              	from deserializer  
+filter              	boolean             	from deserializer   
+id                  	string              	from deserializer   
+invalidvalueaction  	string              	from deserializer   
+label               	string              	from deserializer   
+minvalue            	double              	from deserializer   
+maxvalue            	double              	from deserializer   
+persistent          	boolean             	from deserializer   
+retentioninterval   	int                 	from deserializer   
+timeprecision       	string              	from deserializer   
+type                	string              	from deserializer   
+versioning          	boolean             	from deserializer   
+t                   	map<string,string>  	from deserializer     
 ```
 
 ####Usage
@@ -292,12 +339,13 @@ id                  	string              	from deserializer
 hive> SELECT * 
           FROM atsd_metric 
         LIMIT 1;
-cpu.busy	{"table":"common"}	false   �
+cpu.busy	true	descriptioin	false	true	�	TRANSFORM	label	0.0	100.0	true	5	SECONDS		true	{"table":"commons"}        
 ```
 
 ###Hive table for atsd_entity_group
 
 ```sql
+hive> DROP TABLE atsd_entity_group;
 hive> CREATE EXTERNAL TABLE atsd_entity_group(row_key string, e map<string,string>,  g map<string,string>)
 STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
 WITH SERDEPROPERTIES (
@@ -322,6 +370,7 @@ cadvisor-hosts	{}	{"__expression__":"tags.container_host = 'true'","__portals_ne
 ###Hive table for atsd_entity_lookup
 
 ```sql
+hive> DROP TABLE atsd_entity_lookup;
 hive> CREATE EXTERNAL TABLE atsd_entity_lookup(row_key string, c map<string,string>)
 STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
 WITH SERDEPROPERTIES (
@@ -345,6 +394,7 @@ replacement_table	{"_":"A=C\nB=e\nb=f\nD=Z"}
 ###Hive table for atsd_properties
 
 ```sql
+hive> DROP TABLE atsd_properties;
 hive> CREATE EXTERNAL TABLE atsd_properties(row_key string, c map<string,string>)
 STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
 WITH SERDEPROPERTIES (
