@@ -1,4 +1,5 @@
 /*
+ * Copyright 2016 Axibase Corporation or its affiliates. All Rights Reserved.
  * Copyright 2013-2015 Qubole
  * Copyright 2013-2015 Makoto YUI
  *
@@ -16,10 +17,6 @@
  */
 package org.apache.hadoop.hive.jdbc.storagehandler;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
@@ -31,7 +28,11 @@ import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspectorFactory;
 import org.apache.hadoop.hive.serde2.objectinspector.StructField;
 import org.apache.hadoop.hive.serde2.objectinspector.StructObjectInspector;
 import org.apache.hadoop.io.Writable;
-import java.sql.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * Serialize/Deserialize a tuple.

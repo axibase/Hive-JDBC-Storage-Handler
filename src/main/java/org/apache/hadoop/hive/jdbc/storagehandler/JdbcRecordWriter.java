@@ -1,4 +1,5 @@
 /*
+ * Copyright 2016 Axibase Corporation or its affiliates. All Rights Reserved.
  * Copyright 2013-2015 Qubole
  * Copyright 2013-2015 Makoto YUI
  *
@@ -16,15 +17,16 @@
  */
 package org.apache.hadoop.hive.jdbc.storagehandler;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.hive.ql.exec.FileSinkOperator.RecordWriter;
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.mapreduce.lib.db.DBOutputFormat.DBRecordWriter;
 import org.apache.hadoop.util.StringUtils;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class JdbcRecordWriter implements RecordWriter {
 	private static final Log LOG = LogFactory.getLog(JdbcRecordWriter.class);

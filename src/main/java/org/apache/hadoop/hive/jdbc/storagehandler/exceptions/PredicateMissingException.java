@@ -1,4 +1,5 @@
 /*
+ * Copyright 2016 Axibase Corporation or its affiliates. All Rights Reserved.
  * Copyright 2013-2015 Qubole
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,8 +15,6 @@
  * limitations under the License.
  */
 package org.apache.hadoop.hive.jdbc.storagehandler.exceptions;
-
-import java.io.IOException;
 
 /**
  * Created by stagra on 7/23/15.

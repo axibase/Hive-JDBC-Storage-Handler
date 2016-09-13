@@ -1,4 +1,5 @@
 /*
+ * Copyright 2016 Axibase Corporation or its affiliates. All Rights Reserved.
  * Copyright 2013-2015 Qubole
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,14 +16,10 @@
  */
 package org.apache.hadoop.hive.wrapper;
 
-import java.io.DataInput;
-import java.io.DataOutput;
-import java.io.IOException;
-
-import org.apache.hadoop.mapred.Reporter;
-import org.apache.hadoop.mapreduce.StatusReporter;
 import org.apache.hadoop.mapred.Counters;
 import org.apache.hadoop.mapred.InputSplit;
+import org.apache.hadoop.mapred.Reporter;
+import org.apache.hadoop.mapreduce.StatusReporter;
 
 public class ReporterWrapper extends StatusReporter implements Reporter {
     private Reporter wrappedReporter;

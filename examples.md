@@ -29,16 +29,13 @@ hive> CREATE EXTERNAL TABLE cpu_busy
         "mapred.jdbc.output.table.name"="'mpstat.cpu_busy'",
         "mapred.jdbc.hive.lazy.split"= "true"
       );
-
 hive> DESCRIBE cpu_busy;
-```
 
-```ls
-|                      |                      |                      | 
 |----------------------|----------------------|----------------------| 
 | entity               | string               | from deserializer    | 
 | datetime             | timestamp            | from deserializer    | 
 | value                | float                | from deserializer    | 
+|----------------------|----------------------|----------------------| 
 ```
 
 ####Usage
@@ -47,12 +44,10 @@ hive> DESCRIBE cpu_busy;
 hive> SELECT * 
           FROM cpu_busy 
         LIMIT 1;
-```
 
-```ls
-|              |                     |       | 
 |--------------|---------------------|-------| 
 | nurswgvml007 | 2014-09-25 13:58:04 | 10.31 | 
+|--------------|---------------------|-------| 
 ```
 
 
@@ -61,12 +56,10 @@ hive> SELECT value, datetime
           FROM cpu_busy 
         WHERE entity = 'nurswgvml212' 
           LIMIT 1;
-```
 
-```ls
-|       |                     | 
 |-------|---------------------| 
 | 100.0 | 2015-10-20 11:36:05 | 
+|-------|---------------------| 
 ```
 
 
@@ -75,10 +68,6 @@ hive> SELECT value, datetime
           FROM cpu_busy 
         WHERE entity = 'nurswgvml212' AND datetime > '2015-10-19T19:00:00.000Z' 
           LIMIT 10;
-```
-
-```ls
-|       |                     | 
 |-------|---------------------| 
 | 100.0 | 2015-10-20 11:36:05 | 
 | 100.0 | 2015-10-20 11:36:21 | 
@@ -90,6 +79,7 @@ hive> SELECT value, datetime
 | 100.0 | 2015-10-20 11:37:57 | 
 | 100.0 | 2015-10-20 11:38:07 | 
 | 100.0 | 2015-10-20 11:38:13 | 
+|-------|---------------------| 
 ```
 
 
@@ -98,10 +88,7 @@ hive> SELECT value, datetime
           FROM cpu_busy 
         WHERE entity = 'nurswgvml212' 
           AND datetime > '2015-10-19T19:00:00.000Z' AND datetime <= '2015-10-20T19:00:00.000Z';
-```
 
-```ls
-|       |                     | 
 |-------|---------------------| 
 | 100.0 | 2015-10-20 11:36:05 | 
 | 100.0 | 2015-10-20 11:36:21 | 
@@ -119,6 +106,7 @@ hive> SELECT value, datetime
 | 100.0 | 2015-10-20 12:12:54 | 
 | 100.0 | 2015-10-20 12:13:10 | 
 | 100.0 | 2015-10-20 12:13:26 | 
+|-------|---------------------| 
 ```
 
 
@@ -139,16 +127,14 @@ hive> CREATE EXTERNAL TABLE disk_used
         "mapred.jdbc.hive.lazy.split"= "true"
       );
 hive> DESCRIBE disk_used;
-```
 
-```ls
-|                      |                      |                      | 
 |----------------------|----------------------|----------------------| 
 | entity               | string               | from deserializer    | 
 | datetime             | timestamp            | from deserializer    | 
 | value                | float                | from deserializer    | 
 | tags$file_system     | string               | from deserializer    | 
 | tags$mount_point     | string               | from deserializer    | 
+|----------------------|----------------------|----------------------| 
 ```
 
 ####Usage
@@ -157,12 +143,10 @@ hive> DESCRIBE disk_used;
 hive> SELECT * 
           FROM disk_used 
         LIMIT 1;
-```
-
-```ls
-|              |                     |     |       |          | 
+        
 |--------------|---------------------|-----|-------|----------| 
 | nurswgvml006 | 2016-02-05 15:43:01 | 0.0 | tmpfs | /dev/shm | 
+|--------------|---------------------|-----|-------|----------| 
 ```
 
 
@@ -171,12 +155,10 @@ hive> SELECT value, `tags$mount_point`, datetime
           FROM disk_used 
         WHERE entity = 'nurswgvml301' 
           LIMIT 1;
-```
-
-```ls
-|       |      |                     | 
+          
 |-------|------|---------------------| 
 | 704.0 | /run | 2016-08-25 10:43:26 | 
+|-------|------|---------------------| 
 ```
 
 
@@ -185,12 +167,10 @@ hive> SELECT value, datetime
           FROM disk_used 
         WHERE entity = 'nurswgvml301' AND `tags$mount_point`='/dev' 
           LIMIT 1;
-```
-
-```ls
-|     |                     | 
+          
 |-----|---------------------| 
 | 4.0 | 2016-08-25 10:43:26 | 
+|-----|---------------------| 
 ```
 
 
@@ -199,10 +179,7 @@ hive> SELECT value, `tags$mount_point`, `tags$file_system`
           FROM disk_used 
         WHERE entity = 'nurswgvml301' AND datetime > '2016-08-24T19:00:00.000Z' 
           LIMIT 10;
-```
 
-```ls
-|       |      |       | 
 |-------|------|-------| 
 | 704.0 | /run | tmpfs | 
 | 704.0 | /run | tmpfs | 
@@ -214,6 +191,7 @@ hive> SELECT value, `tags$mount_point`, `tags$file_system`
 | 700.0 | /run | tmpfs | 
 | 700.0 | /run | tmpfs | 
 | 700.0 | /run | tmpfs | 
+|-------|------|-------| 
 ```
 
 
@@ -222,10 +200,7 @@ hive> SELECT value, `tags$mount_point`, `tags$file_system`
           FROM disk_used 
         WHERE entity = 'nurswgvml301' 
           AND datetime > '2016-08-24T23:00:00.000Z' AND datetime <= '2016-08-25T10:45:00.000Z' order by value desc;
-```
 
-```ls
-|           |                |           | 
 |-----------|----------------|-----------| 
 | 1316576.0 | /              | /dev/sda1 | 
 | 1316576.0 | /              | /dev/sda1 | 
@@ -249,7 +224,7 @@ hive> SELECT value, `tags$mount_point`, `tags$file_system`
 | 0.0       | /run/lock      | none      | 
 | 0.0       | /run/lock      | none      | 
 | 0.0       | /run/lock      | none      | 
-
+|-----------|----------------|-----------| 
 ```
 
 
@@ -279,10 +254,7 @@ hive> CREATE EXTERNAL TABLE atsd_series(
         "mapred.jdbc.hive.lazy.split"= "true"
       );
 hive> DESCRIBE atsd_series;
-```
 
-```ls
-|                      |                      |                      | 
 |----------------------|----------------------|----------------------| 
 | entity               | string               | from deserializer    | 
 | metric               | string               | from deserializer    | 
@@ -293,6 +265,7 @@ hive> DESCRIBE atsd_series;
 | entity$tags          | string               | from deserializer    | 
 | metric$tags          | string               | from deserializer    | 
 | entity$groups        | string               | from deserializer    | 
+|----------------------|----------------------|----------------------| 
 ```
 
 ####Usage
@@ -302,12 +275,10 @@ hive> SELECT *
           FROM atsd_series 
         WHERE metric = 'df.disk_used' 
           LIMIT 1;
-```
 
-```ls
-|              |              |     |                                        |               |                     |          |                                          | 
 |--------------|--------------|-----|----------------------------------------|---------------|---------------------|----------|------------------------------------------| 
 | nurswgvml006 | df.disk_used | 0.0 | file_system=tmpfs;mount_point=/dev/shm | 1454686981000 | 2016-02-05 15:43:01 | os=Linux | java-loggers;nmon-linux;nmon-linux-beta  | 
+|--------------|--------------|-----|----------------------------------------|---------------|---------------------|----------|------------------------------------------| 
 ```
 
 
@@ -317,12 +288,10 @@ hive> SELECT *
         WHERE metric = 'df.disk_used' AND entity = 'nurswgvml301' 
           AND datetime > '2016-08-24T23:00:00.000Z' AND datetime <= '2016-08-25T10:45:00.000Z' 
         LIMIT 1;
-```
 
-```ls
-|              |              |       |                                    |               |                                                               | 
 |--------------|--------------|-------|------------------------------------|---------------|---------------------------------------------------------------| 
 | nurswgvml301 | df.disk_used | 704.0 | file_system=tmpfs;mount_point=/run | 1472121806000 | 2016-08-25 10:43:26 nmon-linux;nmon-linux-beta;nur-collectors | 
+|--------------|--------------|-------|------------------------------------|---------------|---------------------------------------------------------------| 
 ```
 
 
@@ -331,12 +300,10 @@ hive> SELECT *
           FROM atsd_series 
         WHERE metric = 'mpstat.cpu_busy' 
           LIMIT 1;
-```
 
-```ls
-|              |                 |       |               |                     |                                                            |                                                  | 
 |--------------|-----------------|-------|---------------|---------------------|------------------------------------------------------------|--------------------------------------------------| 
 | nurswgvml007 | mpstat.cpu_busy | 10.31 | 1411653484000 | 2014-09-25 13:58:04 | alias=007;app=ATSD;environment=prod;ip=10.102.0.6;os=Linux | java-loggers;java-virtual-machine;nmon-sub-group | 
+|--------------|-----------------|-------|---------------|---------------------|------------------------------------------------------------|--------------------------------------------------| 
 ```
 
 
@@ -346,12 +313,10 @@ hive> SELECT *
         WHERE metric = 'mpstat.cpu_busy' AND entity = 'nurswgvml212' 
           AND datetime > '2015-10-19T19:00:00.000Z' AND datetime <= '2015-10-20T19:00:00.000Z' 
         LIMIT 1;
-```
 
-```ls
-|              |                 |       |               |                     |                                                |                                                           | 
 |--------------|-----------------|-------|---------------|---------------------|------------------------------------------------|-----------------------------------------------------------| 
 | nurswgvml212 | mpstat.cpu_busy | 100.0 | 1445340965000 | 2015-10-20 11:36:05 | app=ITM;os=Red Hat Enterprise Linux Server 6.4 |  nmon-linux;nmon-linux-beta;tcollector - linux;VMware VMs | 
+|--------------|-----------------|-------|---------------|---------------------|------------------------------------------------|-----------------------------------------------------------| 
 ```
 
 
@@ -373,15 +338,13 @@ hive> CREATE EXTERNAL TABLE atsd_entity(
       )
       TBLPROPERTIES("hbase.table.name" = "atsd_entity");
 hive> describe atsd_entity;
-```
 
-```ls
-|                      |                      |                      | 
 |----------------------|----------------------|----------------------| 
 | row_key              | string               | from deserializer    | 
 | tags                 | map<string,string>   | from deserializer    | 
 | disabled             | boolean              | from deserializer    | 
 | id                   | string               | from deserializer    | 
+|----------------------|----------------------|----------------------| 
 ```
 
 ####Usage
@@ -390,12 +353,10 @@ hive> describe atsd_entity;
 hive> SELECT * 
           FROM atsd_entity 
         LIMIT 1;
-```
 
-```ls
-|      |                 |      |   | 
 |------|-----------------|------|---| 
 | atsd | {"os":"ubuntu"} | true | 9 | 
+|------|-----------------|------|---| 
 ```
 
 
@@ -442,10 +403,7 @@ hive> CREATE EXTERNAL TABLE atsd_metric(
       )
       TBLPROPERTIES("hbase.table.name" = "atsd_metric");
 hive> describe atsd_metric;
-```
 
-```ls
-|                      |                      |                      | 
 |----------------------|----------------------|----------------------| 
 | row_key              | string               | from deserializer    | 
 | counter              | boolean              | from deserializer    | 
@@ -463,6 +421,7 @@ hive> describe atsd_metric;
 | type                 | string               | from deserializer    | 
 | versioning           | boolean              | from deserializer    | 
 | t                    | map<string,string>   | from deserializer    | 
+|----------------------|----------------------|----------------------| 
 ```
 
 ####Usage
@@ -471,12 +430,10 @@ hive> describe atsd_metric;
 hive> SELECT * 
           FROM atsd_metric 
         LIMIT 1;
-```
 
-```ls
-|          |      |              |       |      |   |           |       |     |       |      |   |         |   |      |                     | 
 |----------|------|--------------|-------|------|---|-----------|-------|-----|-------|------|---|---------|---|------|---------------------| 
 | cpu.busy | true | descriptioin | false | true | � | TRANSFORM | label | 0.0 | 100.0 | true | 5 | SECONDS |  | true | {"table":"commons"} | 
+|----------|------|--------------|-------|------|---|-----------|-------|-----|-------|------|---|---------|---|------|---------------------| 
 ```
 
 
@@ -492,14 +449,12 @@ hive> CREATE EXTERNAL TABLE atsd_entity_group(row_key string, e map<string,strin
       )
       TBLPROPERTIES("hbase.table.name" = "atsd_entity_group");
 hive> describe atsd_entity_group;
-```
 
-```ls
-|                      |                      |                      | 
 |----------------------|----------------------|----------------------| 
 | row_key              | string               | from deserializer    | 
 | e                    | map<string,string>   | from deserializer    | 
 | g                    | map<string,string>   | from deserializer    | 
+|----------------------|----------------------|----------------------| 
 ```
 
 ####Usage
@@ -508,12 +463,10 @@ hive> describe atsd_entity_group;
 hive> SELECT * 
           FROM atsd_entity_group 
         LIMIT 1;
-```
 
-```ls
-|                |    |                                                                                 | 
 |----------------|----|---------------------------------------------------------------------------------| 
 | cadvisor-hosts | {} | {"__expression__":"tags.container_host = 'true'","__portals_new__":"8,9,10,11"} | 
+|----------------|----|---------------------------------------------------------------------------------| 
 ```
 
 
@@ -529,13 +482,11 @@ hive> CREATE EXTERNAL TABLE atsd_entity_lookup(row_key string, c map<string,stri
       )
       TBLPROPERTIES("hbase.table.name" = "atsd_entity_lookup");
 hive> describe atsd_entity_lookup;
-```
 
-```ls
-|                      |                      |                      | 
 |----------------------|----------------------|----------------------| 
 | row_key              | string               | from deserializer    | 
 | c                    | map<string,string>   | from deserializer    | 
+|----------------------|----------------------|----------------------| 
 ```
 
 ####Usage
@@ -544,12 +495,10 @@ hive> describe atsd_entity_lookup;
 hive> SELECT * 
           FROM atsd_entity_lookup 
         LIMIT 1;
-```
 
-```ls
-|                   |                            | 
 |-------------------|----------------------------| 
 | replacement_table | {"_":"A=C\nB=e\nb=f\nD=Z"} | 
+|-------------------|----------------------------| 
 ```
 
 
@@ -565,13 +514,11 @@ hive> CREATE EXTERNAL TABLE atsd_properties(row_key string, c map<string,string>
       )
       TBLPROPERTIES("hbase.table.name" = "atsd_properties");
 hive> describe atsd_properties;
-```
 
-```ls
-|                      |                      |                      | 
 |----------------------|----------------------|----------------------| 
 | row_key              | string               | from deserializer    | 
 | c                    | map<string,string>   | from deserializer    | 
+|----------------------|----------------------|----------------------| 
 ```
 
 ####Usage
@@ -580,11 +527,9 @@ hive> describe atsd_properties;
 hive> SELECT * 
           FROM atsd_properties 
         LIMIT 1;
-```
 
-```ls
-|                                                                                              |                                                                                                                                                                                                        | 
 |----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
 | "java.log_aggregator.operating_system":"atsd-distributed":"command":"com.axibase.tsd.Server" | {"arch":"amd64","availableprocessors":"12","maxfiledescriptorcount":"1048576","name":"Linux","totalphysicalmemorysize":"66954264576","totalswapspacesize":"34342825984","version":"3.13.0-83-generic"} | 
+|----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
 ```
 

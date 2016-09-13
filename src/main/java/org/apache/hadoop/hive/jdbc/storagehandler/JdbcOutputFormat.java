@@ -1,4 +1,5 @@
 /*
+ * Copyright 2016 Axibase Corporation or its affiliates. All Rights Reserved.
  * Copyright 2013-2015 Qubole
  * Copyright 2013-2015 Makoto YUI
  *
@@ -17,22 +18,21 @@
 
 package org.apache.hadoop.hive.jdbc.storagehandler;
 
-import java.io.IOException;
-import java.util.Properties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.hive.ql.exec.FileSinkOperator.RecordWriter;
 import org.apache.hadoop.hive.ql.io.HiveOutputFormat;
+import org.apache.hadoop.hive.shims.ShimLoader;
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.mapred.JobConf;
-import org.apache.hadoop.util.Progressable;
-import org.apache.hadoop.hive.shims.ShimLoader;
-import org.apache.hadoop.mapreduce.TaskAttemptContext;
-import org.apache.hadoop.mapreduce.TaskAttemptID;
 import org.apache.hadoop.mapred.lib.db.DBOutputFormat;
-import org.apache.hadoop.mapred.lib.db.DBOutputFormat.*;
+import org.apache.hadoop.mapreduce.TaskAttemptContext;
+import org.apache.hadoop.util.Progressable;
+
+import java.io.IOException;
+import java.util.Properties;
 
 public class JdbcOutputFormat<V> extends DBOutputFormat<DbRecordWritable, V>
 		implements HiveOutputFormat<DbRecordWritable, V> {

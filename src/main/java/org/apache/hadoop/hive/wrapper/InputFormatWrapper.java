@@ -1,4 +1,5 @@
 /*
+ * Copyright 2016 Axibase Corporation or its affiliates. All Rights Reserved.
  * Copyright 2013-2015 Qubole
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,28 +16,20 @@
  */
 package org.apache.hadoop.hive.wrapper;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.hive.jdbc.storagehandler.Constants;
+import org.apache.hadoop.hive.jdbc.storagehandler.JdbcDBInputSplit;
+import org.apache.hadoop.hive.shims.ShimLoader;
+import org.apache.hadoop.mapred.*;
+import org.apache.hadoop.mapreduce.InputFormat;
+import org.apache.hadoop.mapreduce.TaskAttemptContext;
+import org.apache.hadoop.mapreduce.lib.db.DBInputFormat.DBInputSplit;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.hadoop.mapreduce.InputFormat;
-import org.apache.hadoop.mapreduce.TaskAttemptContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.apache.hadoop.fs.Path;
-
-import org.apache.hadoop.mapred.FileInputFormat;
-import org.apache.hadoop.mapred.RecordReader;
-import org.apache.hadoop.mapred.Reporter;
-import org.apache.hadoop.mapred.JobConf;
-import org.apache.hadoop.mapred.InputSplit;
-import org.apache.hadoop.mapred.FileSplit;
-import org.apache.hadoop.hive.shims.ShimLoader;
-import org.apache.hadoop.mapreduce.lib.db.DBInputFormat.*;
-import org.apache.hadoop.hive.jdbc.storagehandler.JdbcDBInputSplit;
-import org.apache.hadoop.hive.jdbc.storagehandler.Constants;
 
 public class InputFormatWrapper<K, V> implements
         org.apache.hadoop.mapred.InputFormat {

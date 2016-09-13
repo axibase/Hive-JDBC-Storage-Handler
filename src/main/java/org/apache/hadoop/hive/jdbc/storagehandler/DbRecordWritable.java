@@ -1,4 +1,5 @@
 /*
+ * Copyright 2016 Axibase Corporation or its affiliates. All Rights Reserved.
  * Copyright 2013-2015 Qubole
  * Copyright 2013-2015 Makoto YUI
  * 
@@ -17,6 +18,8 @@
 
 package org.apache.hadoop.hive.jdbc.storagehandler;
 
+import org.apache.hadoop.io.Writable;
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
@@ -25,8 +28,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Arrays;
-import org.apache.hadoop.io.Writable;
-import org.apache.hadoop.mapred.lib.db.DBWritable;
 
 public class DbRecordWritable implements Writable,
 		org.apache.hadoop.mapred.lib.db.DBWritable,

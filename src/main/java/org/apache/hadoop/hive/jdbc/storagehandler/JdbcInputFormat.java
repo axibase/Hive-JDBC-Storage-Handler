@@ -1,4 +1,5 @@
 /*
+ * Copyright 2016 Axibase Corporation or its affiliates. All Rights Reserved.
  * Copyright 2013-2015 Qubole
  * Copyright 2013-2015 Makoto YUI
  *
@@ -19,17 +20,16 @@ package org.apache.hadoop.hive.jdbc.storagehandler;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import java.io.IOException;
-
 import org.apache.hadoop.hive.jdbc.storagehandler.exceptions.PredicateMissingException;
+import org.apache.hadoop.hive.ql.plan.TableScanDesc;
+import org.apache.hadoop.hive.wrapper.InputFormatWrapper;
 import org.apache.hadoop.mapred.InputSplit;
 import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapred.RecordReader;
 import org.apache.hadoop.mapred.Reporter;
 import org.apache.hadoop.mapreduce.lib.db.DBInputFormat;
-import org.apache.hadoop.hive.ql.plan.TableScanDesc;
 
-import org.apache.hadoop.hive.wrapper.InputFormatWrapper;
+import java.io.IOException;
 
 public class JdbcInputFormat extends InputFormatWrapper {
     private static final Log LOG = LogFactory.getLog(JdbcInputFormat.class);

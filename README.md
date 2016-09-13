@@ -64,12 +64,10 @@ hive> CREATE EXTERNAL TABLE disk_used
 hive> SELECT * 
           FROM disk_used 
         LIMIT 1;
-```
 
-```ls
-|              |                     |     |       |          | 
 |--------------|---------------------|-----|-------|----------| 
 | nurswgvml006 | 2016-02-05 15:43:01 | 0.0 | tmpfs | /dev/shm | 
+|--------------|---------------------|-----|-------|----------| 
 ```
 
 
@@ -78,12 +76,10 @@ hive> SELECT value, `tags$mount_point`, datetime
           FROM disk_used 
         WHERE entity = 'nurswgvml301' 
           LIMIT 1;
-```
 
-```ls
-|       |      |                     | 
 |-------|------|---------------------| 
 | 704.0 | /run | 2016-08-25 10:43:26 | 
+|-------|------|---------------------| 
 ```
 
 
@@ -92,12 +88,10 @@ hive> SELECT value, datetime
           FROM disk_used 
         WHERE entity = 'nurswgvml301' AND `tags$mount_point`='/dev' 
           LIMIT 1;
-```
 
-```ls
-|     |                     | 
 |-----|---------------------| 
 | 4.0 | 2016-08-25 10:43:26 | 
+|-----|---------------------| 
 ```
 
 
@@ -106,10 +100,7 @@ hive> SELECT value, `tags$mount_point`, `tags$file_system`
           FROM disk_used 
         WHERE entity = 'nurswgvml301' AND datetime > '2016-08-24T19:00:00.000Z' 
           LIMIT 10;
-```
 
-```ls
-|       |      |       | 
 |-------|------|-------| 
 | 704.0 | /run | tmpfs | 
 | 704.0 | /run | tmpfs | 
@@ -121,6 +112,7 @@ hive> SELECT value, `tags$mount_point`, `tags$file_system`
 | 700.0 | /run | tmpfs | 
 | 700.0 | /run | tmpfs | 
 | 700.0 | /run | tmpfs | 
+|-------|------|-------| 
 ```
 
 
@@ -129,10 +121,7 @@ hive> SELECT value, `tags$mount_point`, `tags$file_system`
           FROM disk_used 
         WHERE entity = 'nurswgvml301' 
           AND datetime > '2016-08-24T23:00:00.000Z' AND datetime <= '2016-08-25T10:45:00.000Z' order by value desc;
-```
 
-```ls
-|           |                |           | 
 |-----------|----------------|-----------| 
 | 1316576.0 | /              | /dev/sda1 | 
 | 1316576.0 | /              | /dev/sda1 | 
@@ -156,6 +145,7 @@ hive> SELECT value, `tags$mount_point`, `tags$file_system`
 | 0.0       | /run/lock      | none      | 
 | 0.0       | /run/lock      | none      | 
 | 0.0       | /run/lock      | none      | 
+|-----------|----------------|-----------| 
 ```
 
 ## Examples Categories
