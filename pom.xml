@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>qubole-hive-JDBC</groupId>
-    <artifactId>qubole-hive-JDBC</artifactId>
+    <groupId>axibase-hive-JDBC</groupId>
+    <artifactId>axibase-hive-JDBC</artifactId>
     <version>0.0.6</version>
     <packaging>jar</packaging>
 
-    <name>qubole-hive-JDBC-storage-handler</name>
+    <name>axibase-hive-JDBC-storage-handler</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -98,7 +98,7 @@
                       <shadedPattern>qksh.shaded.org.joda</shadedPattern>
                     </relocation>
                   </relocations>
-                  <finalName>qubole-hive-JDBC-final-${project.version}</finalName>
+                  <finalName>axibase-hive-JDBC-final-${project.version}</finalName>
                 </configuration>
                 <executions>
                     <execution>
