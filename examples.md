@@ -252,13 +252,17 @@ nmon-linux;nmon-linux-beta;scollector-linux;scollector-nur;solarwind-vmware-vm;t
 
 ```
 hive> DROP TABLE atsd_entity;
-hive> CREATE EXTERNAL TABLE atsd_entity(row_key string, tags map<string,string>, disabled boolean, id string)
-STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
-WITH SERDEPROPERTIES (
-"hbase.columns.mapping" = ":key,t:,n:disabled, n:id",
-"hbase.table.default.storage.type" = "binary"
-)
-TBLPROPERTIES("hbase.table.name" = "atsd_entity");
+hive> CREATE EXTERNAL TABLE atsd_entity(
+          row_key string,
+          tags map<string,string>,
+          disabled boolean,
+          id string)
+      STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+      WITH SERDEPROPERTIES (
+          "hbase.columns.mapping" = ":key,t:,n:disabled, n:id",
+          "hbase.table.default.storage.type" = "binary"
+      )
+      TBLPROPERTIES("hbase.table.name" = "atsd_entity");
 hive> describe atsd_entity;
 row_key             	string              	from deserializer   
 tags                	map<string,string>  	from deserializer   
@@ -277,26 +281,27 @@ atsd	{"os":"ubuntu"}	true	9
 ###Hive table for atsd_metric
 
 ```sql
+hive> DROP TABLE atsd_metric;
 hive> CREATE EXTERNAL TABLE atsd_metric(
-        row_key string,
-        counter boolean,
-        description string,
-        disabled boolean,
-        filter boolean,
-        id string,
-        invalidValueAction string,
-        label string,
-        minValue double,
-        maxValue double,
-        persistent boolean,
-        retentionInterval int,
-        timePrecision string,
-        type string,
-        versioning boolean,
-        t map<string,string>)
-STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
-WITH SERDEPROPERTIES (
-"hbase.columns.mapping" = " :key,
+          row_key string,
+          counter boolean,
+          description string,
+          disabled boolean,
+          filter boolean,
+          id string,
+          invalidValueAction string,
+          label string,
+          minValue double,
+          maxValue double,
+          persistent boolean,
+          retentionInterval int,
+          timePrecision string,
+          type string,
+          versioning boolean,
+          t map<string,string>)
+      STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+      WITH SERDEPROPERTIES (
+          "hbase.columns.mapping" = " :key,
                             n:counter,
                             n:description,
                             n:disabled,
@@ -312,10 +317,10 @@ WITH SERDEPROPERTIES (
                             n:type,
                             n:versioning,
                             t:",
-"hbase.table.default.storage.type" = "binary"
-)
-TBLPROPERTIES("hbase.table.name" = "atsd_metric");
-hive> describe atsd_metric
+          "hbase.table.default.storage.type" = "binary"
+      )
+      TBLPROPERTIES("hbase.table.name" = "atsd_metric");
+hive> describe atsd_metric;
 row_key             	string              	from deserializer   
 counter             	boolean             	from deserializer   
 description         	string              	from deserializer   
@@ -346,13 +351,13 @@ cpu.busy	true	descriptioin	false	true	�	TRANSFORM	label	0.0	100.0	true	5	SECON
 
 ```sql
 hive> DROP TABLE atsd_entity_group;
-hive> CREATE EXTERNAL TABLE atsd_entity_group(row_key string, e map<string,string>,  g map<string,string>)
-STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
-WITH SERDEPROPERTIES (
-"hbase.columns.mapping" = ":key,e:,g:",
-"hbase.table.default.storage.type" = "binary"
-)
-TBLPROPERTIES("hbase.table.name" = "atsd_entity_group");
+hive> CREATE EXTERNAL TABLE atsd_entity_group(row_key string, e map<string,string>, g map<string,string>)
+      STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+      WITH SERDEPROPERTIES (
+          "hbase.columns.mapping" = ":key,e:,g:",
+          "hbase.table.default.storage.type" = "binary"
+      )
+      TBLPROPERTIES("hbase.table.name" = "atsd_entity_group");
 hive> describe atsd_entity_group;
 row_key             	string              	from deserializer   
 e                   	map<string,string>  	from deserializer   
@@ -372,12 +377,12 @@ cadvisor-hosts	{}	{"__expression__":"tags.container_host = 'true'","__portals_ne
 ```sql
 hive> DROP TABLE atsd_entity_lookup;
 hive> CREATE EXTERNAL TABLE atsd_entity_lookup(row_key string, c map<string,string>)
-STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
-WITH SERDEPROPERTIES (
-"hbase.columns.mapping" = ":key,c:",
-"hbase.table.default.storage.type" = "binary"
-)
-TBLPROPERTIES("hbase.table.name" = "atsd_entity_lookup");
+      STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+      WITH SERDEPROPERTIES (
+          "hbase.columns.mapping" = ":key,c:",
+          "hbase.table.default.storage.type" = "binary"
+      )
+      TBLPROPERTIES("hbase.table.name" = "atsd_entity_lookup");
 hive> describe atsd_entity_lookup;
 row_key             	string              	from deserializer   
 c                   	map<string,string>  	from deserializer   
@@ -396,12 +401,12 @@ replacement_table	{"_":"A=C\nB=e\nb=f\nD=Z"}
 ```sql
 hive> DROP TABLE atsd_properties;
 hive> CREATE EXTERNAL TABLE atsd_properties(row_key string, c map<string,string>)
-STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
-WITH SERDEPROPERTIES (
-"hbase.columns.mapping" = ":key,c:",
-"hbase.table.default.storage.type" = "binary"
-)
-TBLPROPERTIES("hbase.table.name" = "atsd_properties");
+      STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+      WITH SERDEPROPERTIES (
+          "hbase.columns.mapping" = ":key,c:",
+          "hbase.table.default.storage.type" = "binary"
+      )
+      TBLPROPERTIES("hbase.table.name" = "atsd_properties");
 hive> describe atsd_properties;
 row_key             	string              	from deserializer   
 c                   	map<string,string>  	from deserializer 

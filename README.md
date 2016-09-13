@@ -18,6 +18,19 @@ The **Hive Storage Handler For JDBC** is a fork of [HiveJdbcStorageHandler](http
 
 * The JARs for the storage handler can be found in the ```target/``` folder. Use ```qubole-hive-JDBC-0.0.4.jar``` in the hive session (see below).
 
+##Preparing steps##
+
+Download latest version of atsd-jdbc-driver [jar file](https://github.com/axibase/atsd-jdbc/releases/download/RELEASE-1.2.11/atsd-jdbc-1.2.11-DEPS.jar) with dependencies and copy it to /usr/lib/hadoop-mapreduce/lib/.
+
+```
+sudo cp atsd-jdbc-1.2.XX-SNAPSHOT-DEPS.jar /usr/lib/hadoop-mapreduce/lib/
+```
+
+Enable hive.exec.mode.local.auto setting via `Hive Client Advanced Configuration Snippet (Safety Valve) for hive-site.xml` in Cloudera Manager Hive Configuration.
+
+![](images/local-mode.png)
+
+
 ##Usage##
 * Add the JAR to the Hive session. ```<path-to-jar>``` is the path to the above mentioned JAR. For using this with Qubole hive, upload the JAR to an S3 bucket and provide its path.
   
@@ -36,7 +49,7 @@ The **Hive Storage Handler For JDBC** is a fork of [HiveJdbcStorageHandler](http
 ##Table Creation##
 
 ```
-hive> DROP TABLE disk_used
+hive> DROP TABLE disk_used;
 hive> CREATE EXTERNAL TABLE disk_used
       row format serde 'org.apache.hadoop.hive.jdbc.storagehandler.JdbcSerDe'
       STORED BY 'org.apache.hadoop.hive.jdbc.storagehandler.JdbcStorageHandler'
