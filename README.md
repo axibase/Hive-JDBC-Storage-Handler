@@ -36,8 +36,8 @@ The **Hive Storage Handler For JDBC** is a fork of [HiveJdbcStorageHandler](http
 ##Table Creation##
 
 ```
-DROP TABLE disk_used
-CREATE EXTERNAL TABLE disk_used
+hive> DROP TABLE disk_used
+hive> CREATE EXTERNAL TABLE disk_used
       row format serde 'org.apache.hadoop.hive.jdbc.storagehandler.JdbcSerDe'
       STORED BY 'org.apache.hadoop.hive.jdbc.storagehandler.JdbcStorageHandler'
       TBLPROPERTIES (
@@ -48,7 +48,8 @@ CREATE EXTERNAL TABLE disk_used
         "mapred.jdbc.input.table.name"="'df.disk_used'",
         "mapred.jdbc.output.table.name"="'df.disk_used'",
         "mapred.jdbc.hive.lazy.split"= "true"
-      );```
+      );
+```
 
 
 ####Queries to Read from ATSD (see more [examples](/examples.md) )####
