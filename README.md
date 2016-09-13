@@ -3,6 +3,8 @@
 The **Hive Storage Handler For JDBC** is a fork of [HiveJdbcStorageHandler](https://github.com/qubole/Hive-JDBC-Storage-Handler), helps users read from [Axibase Time Series Database](http://axibase.com/products/axibase-time-series-database/) using Hive, and also enabling them to run SQL queries to analyze data that resides in JDBC tables.
 
 
+Build from source or download prepared binary [jar file](https://github.com/axibase/Hive-JDBC-Storage-Handler/releases/download/0.0.6/axibase-hive-JDBC-0.0.6.jar).
+
 ##Building from Source##
 * Download the code from Github:
 ```
@@ -16,16 +18,14 @@ The **Hive Storage Handler For JDBC** is a fork of [HiveJdbcStorageHandler](http
   $ mvn clean install -Phadoop-1
 ```
 
-* The JARs for the storage handler can be found in the ```target/``` folder. Use ```axibase-hive-JDBC-0.0.4.jar``` in the hive session (see below).
-
-* Or you can download prepared binary [jar file](https://github.com/axibase/Hive-JDBC-Storage-Handler/releases/download/RELEASE-0.0.6/axibase-hive-JDBC-0.0.6.jar)
+* The JARs for the storage handler can be found in the ```target/``` folder. Use ```axibase-hive-JDBC-0.0.4.jar``` in the hive session.
 
 ##Preparing steps##
 
 * Download latest version of atsd-jdbc-driver [jar file](https://github.com/axibase/atsd-jdbc/releases/download/RELEASE-1.2.11/atsd-jdbc-1.2.11-DEPS.jar) with dependencies and copy it to /usr/lib/hadoop-mapreduce/lib/.
 
 ```
-sudo cp atsd-jdbc-1.2.XX-SNAPSHOT-DEPS.jar /usr/lib/hadoop-mapreduce/lib/
+sudo cp atsd-jdbc-1.2.XX-DEPS.jar /usr/lib/hadoop-mapreduce/lib/
 ```
 
 * Enable hive.exec.mode.local.auto setting via `Hive Client Advanced Configuration Snippet (Safety Valve) for hive-site.xml` in Cloudera Manager Hive Configuration.
