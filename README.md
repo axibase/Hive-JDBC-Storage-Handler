@@ -59,6 +59,7 @@ hive> CREATE EXTERNAL TABLE disk_used
 
 
 ####Queries to Read from ATSD (see more [examples](/examples.md) )####
+
 ```sql
 hive> SELECT * 
           FROM disk_used 
@@ -70,6 +71,7 @@ hive> SELECT *
 |--------------|---------------------|-----|-------|----------| 
 | nurswgvml006 | 2016-02-05 15:43:01 | 0.0 | tmpfs | /dev/shm | 
 ```
+
 
 ```sql
 hive> SELECT value, `tags$mount_point`, datetime  
@@ -84,6 +86,7 @@ hive> SELECT value, `tags$mount_point`, datetime
 | 704.0 | /run | 2016-08-25 10:43:26 | 
 ```
 
+
 ```sql
 hive> SELECT value, datetime 
           FROM disk_used 
@@ -96,6 +99,7 @@ hive> SELECT value, datetime
 |-----|---------------------| 
 | 4.0 | 2016-08-25 10:43:26 | 
 ```
+
 
 ```sql
 hive> SELECT value, `tags$mount_point`, `tags$file_system` 
@@ -118,6 +122,7 @@ hive> SELECT value, `tags$mount_point`, `tags$file_system`
 | 700.0 | /run | tmpfs | 
 | 700.0 | /run | tmpfs | 
 ```
+
 
 ```sql
 hive> SELECT value, `tags$mount_point`, `tags$file_system` 

@@ -42,6 +42,7 @@ hive> DESCRIBE cpu_busy;
 ```
 
 ####Usage
+
 ```sql
 hive> SELECT * 
           FROM cpu_busy 
@@ -53,6 +54,7 @@ hive> SELECT *
 |--------------|---------------------|-------| 
 | nurswgvml007 | 2014-09-25 13:58:04 | 10.31 | 
 ```
+
 
 ```sql
 hive> SELECT value, datetime 
@@ -66,6 +68,7 @@ hive> SELECT value, datetime
 |-------|---------------------| 
 | 100.0 | 2015-10-20 11:36:05 | 
 ```
+
 
 ```sql
 hive> SELECT value, datetime 
@@ -88,6 +91,7 @@ hive> SELECT value, datetime
 | 100.0 | 2015-10-20 11:38:07 | 
 | 100.0 | 2015-10-20 11:38:13 | 
 ```
+
 
 ```sql
 hive> SELECT value, datetime 
@@ -116,6 +120,7 @@ hive> SELECT value, datetime
 | 100.0 | 2015-10-20 12:13:10 | 
 | 100.0 | 2015-10-20 12:13:26 | 
 ```
+
 
 ###Hive table for metric with tags
 
@@ -147,6 +152,7 @@ hive> DESCRIBE disk_used;
 ```
 
 ####Usage
+
 ```sql
 hive> SELECT * 
           FROM disk_used 
@@ -158,6 +164,7 @@ hive> SELECT *
 |--------------|---------------------|-----|-------|----------| 
 | nurswgvml006 | 2016-02-05 15:43:01 | 0.0 | tmpfs | /dev/shm | 
 ```
+
 
 ```sql
 hive> SELECT value, `tags$mount_point`, datetime  
@@ -172,6 +179,7 @@ hive> SELECT value, `tags$mount_point`, datetime
 | 704.0 | /run | 2016-08-25 10:43:26 | 
 ```
 
+
 ```sql
 hive> SELECT value, datetime 
           FROM disk_used 
@@ -184,6 +192,7 @@ hive> SELECT value, datetime
 |-----|---------------------| 
 | 4.0 | 2016-08-25 10:43:26 | 
 ```
+
 
 ```sql
 hive> SELECT value, `tags$mount_point`, `tags$file_system` 
@@ -206,6 +215,7 @@ hive> SELECT value, `tags$mount_point`, `tags$file_system`
 | 700.0 | /run | tmpfs | 
 | 700.0 | /run | tmpfs | 
 ```
+
 
 ```sql
 hive> SELECT value, `tags$mount_point`, `tags$file_system` 
@@ -241,6 +251,7 @@ hive> SELECT value, `tags$mount_point`, `tags$file_system`
 | 0.0       | /run/lock      | none      | 
 
 ```
+
 
 ###Hive table for atsd_series
 
@@ -285,6 +296,7 @@ hive> DESCRIBE atsd_series;
 ```
 
 ####Usage
+
 ```sql
 hive> SELECT * 
           FROM atsd_series 
@@ -297,6 +309,7 @@ hive> SELECT *
 |--------------|--------------|-----|----------------------------------------|---------------|---------------------|----------|------------------------------------------| 
 | nurswgvml006 | df.disk_used | 0.0 | file_system=tmpfs;mount_point=/dev/shm | 1454686981000 | 2016-02-05 15:43:01 | os=Linux | java-loggers;nmon-linux;nmon-linux-beta  | 
 ```
+
 
 ```sql
 hive> SELECT * 
@@ -312,6 +325,7 @@ hive> SELECT *
 | nurswgvml301 | df.disk_used | 704.0 | file_system=tmpfs;mount_point=/run | 1472121806000 | 2016-08-25 10:43:26 nmon-linux;nmon-linux-beta;nur-collectors | 
 ```
 
+
 ```sql
 hive> SELECT * 
           FROM atsd_series 
@@ -324,6 +338,7 @@ hive> SELECT *
 |--------------|-----------------|-------|---------------|---------------------|------------------------------------------------------------|--------------------------------------------------| 
 | nurswgvml007 | mpstat.cpu_busy | 10.31 | 1411653484000 | 2014-09-25 13:58:04 | alias=007;app=ATSD;environment=prod;ip=10.102.0.6;os=Linux | java-loggers;java-virtual-machine;nmon-sub-group | 
 ```
+
 
 ```sql
 hive> SELECT * 
@@ -370,6 +385,7 @@ hive> describe atsd_entity;
 ```
 
 ####Usage
+
 ```sql
 hive> SELECT * 
           FROM atsd_entity 
@@ -381,6 +397,7 @@ hive> SELECT *
 |------|-----------------|------|---| 
 | atsd | {"os":"ubuntu"} | true | 9 | 
 ```
+
 
 ###Hive table for atsd_metric
 
@@ -449,6 +466,7 @@ hive> describe atsd_metric;
 ```
 
 ####Usage
+
 ```sql
 hive> SELECT * 
           FROM atsd_metric 
@@ -460,6 +478,7 @@ hive> SELECT *
 |----------|------|--------------|-------|------|---|-----------|-------|-----|-------|------|---|---------|---|------|---------------------| 
 | cpu.busy | true | descriptioin | false | true | � | TRANSFORM | label | 0.0 | 100.0 | true | 5 | SECONDS |  | true | {"table":"commons"} | 
 ```
+
 
 ###Hive table for atsd_entity_group
 
@@ -484,6 +503,7 @@ hive> describe atsd_entity_group;
 ```
 
 ####Usage
+
 ```sql
 hive> SELECT * 
           FROM atsd_entity_group 
@@ -495,6 +515,7 @@ hive> SELECT *
 |----------------|----|---------------------------------------------------------------------------------| 
 | cadvisor-hosts | {} | {"__expression__":"tags.container_host = 'true'","__portals_new__":"8,9,10,11"} | 
 ```
+
 
 ###Hive table for atsd_entity_lookup
 
@@ -518,6 +539,7 @@ hive> describe atsd_entity_lookup;
 ```
 
 ####Usage
+
 ```sql
 hive> SELECT * 
           FROM atsd_entity_lookup 
@@ -529,6 +551,7 @@ hive> SELECT *
 |-------------------|----------------------------| 
 | replacement_table | {"_":"A=C\nB=e\nb=f\nD=Z"} | 
 ```
+
 
 ###Hive table for atsd_properties
 
@@ -552,6 +575,7 @@ hive> describe atsd_properties;
 ```
 
 ####Usage
+
 ```sql
 hive> SELECT * 
           FROM atsd_properties 
